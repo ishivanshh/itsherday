@@ -32,6 +32,69 @@
     overflow-x:hidden;
   }
 
+  .welcome-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+    background:rgba(255,248,240,0.2);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+    text-align:center;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+  }
+
+  .welcome-overlay.hidden{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+  }
+
+  .welcome-card{
+    max-width:620px;
+    padding:clamp(1.8rem, 4vw, 3.2rem);
+    border-radius:28px;
+    background:rgba(255,255,255,0.72);
+    border:1px solid rgba(255,220,184,0.9);
+    box-shadow:0 20px 55px rgba(61,36,24,0.18);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+  }
+
+  .welcome-card h1{
+    margin:0 0 12px;
+    font-size:clamp(2.1rem, 6vw, 3.7rem);
+    line-height:1.08;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--plum);
+  }
+
+  .welcome-card p{
+    margin:0;
+    font-size:clamp(1rem, 2.2vw, 1.3rem);
+    font-weight:700;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--coral);
+  }
+
+  .welcome-heart{
+    display:inline-block;
+    margin-top:14px;
+    font-size:1.35rem;
+    color:var(--coral);
+    animation:pulse 1.4s ease-in-out infinite;
+  }
+
+  @keyframes pulse{
+    0%,100%{ transform:scale(1); opacity:0.9; }
+    50%{ transform:scale(1.12); opacity:1; }
+  }
+
   h1,h2,h3, .display{
     font-family:'Fraunces', serif;
     font-weight:600;
@@ -544,6 +607,14 @@
 </head>
 <body>
 
+<div class="welcome-overlay" id="welcomeOverlay">
+  <div class="welcome-card">
+    <h1>HAPPY FRIENDSHIP DAY</h1>
+    <p>MY ONLY BESTFRIEND</p>
+    <span class="welcome-heart">♡</span>
+  </div>
+</div>
+
 <div class="ambient" id="ambient"></div>
 
 <section class="hero">
@@ -629,14 +700,21 @@
 <section class="footer-note">
   <div class="card">
     <h3>Rose,</h3>
-    <p>last 5 years i have learned a lot from you and i thank you for it. you deserve everything in your life and i wish i could give everything possible to make you happy
-      please stay happy and healthy you are the most precious thing i have in my life.
+    <p>You are my bestfriend and luckly a girlfriend too. i love sharing my thoughts and feelings with you.I will choose you above everything and will never leave your side.  weather you get angry , sad or happy i had never thought of leaving you.I will try to keep you happy till you are with me, and live a life you want to live speak to anyone ,i am sorry a had kept you restricted in some ways but not now .I will improve myself and will become better version for you. "APP MERI JAAN HAI" ❤️
     </p>
     <div class="sign">from Shivi</div>
   </div>
 </section>
 
 <script>
+  const welcomeOverlay = document.getElementById('welcomeOverlay');
+  if (welcomeOverlay) {
+    setTimeout(() => {
+      welcomeOverlay.classList.add('hidden');
+      setTimeout(() => welcomeOverlay.remove(), 900);
+    }, 5000);
+  }
+
   // Ambient floating hearts
   const ambient = document.getElementById('ambient');
   const heartCount = window.innerWidth < 700 ? 8 : 14;
